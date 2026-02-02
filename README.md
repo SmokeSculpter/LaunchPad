@@ -5,5 +5,6 @@ A project management app currently in early development.
 Records of what was worked on on a given day.
 
 ### Febuary 1st
-Started work on SQL database schema. Current ERD:
+Started work on SQL database schema (Still a work in progress). Current ERD:
 
+<img src="ERD.png" alt="Database ERD"  />
