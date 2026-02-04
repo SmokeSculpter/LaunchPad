@@ -38,4 +38,4 @@ Reviewed the ERD from Log-2 against the planned features and made the following 
 - QA approves and moves to `Done`, or sends back for rework
 
 ### Files Created:
-- `lauchpadschema.sql` - Complete SQL Server script to create all tables with constraints and relationships
+- `lauchpadschema.sql` - Complete SQL Server script to create all tables with constraints and relationships, indexes for faster data retrieval, and added insert statements containing dummy data created with AI.
