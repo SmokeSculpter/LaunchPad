@@ -1,33 +1,59 @@
 # LaunchPad
-A project management app currently in early development.
+A modern project management application built for Agile/Scrum teams.
 
-## Febuary 2nd (Log 2)
-Mapped out feature goals for this application & updated database schema to match:
+**Latest Development Log:** [Log-3 (February 4th)](https://github.com/SmokeSculpter/LaunchPad/tree/main/Logs/Log-3)
 
-### Features (May add more minor features at a later date)
-1. Project Structure:
-    - Users can create multiple projects, each with its own set of tickets.
-    - User Roles - Users will have roles (eg. Software Dev, Project Manager, etc.) that enable or disable certain permissions.
-    - Project Settings - A page to change the project name, description, etc.
-2. Dynamic Workflows:
-    - Custom Status Creation - A settings page where users can add, rename, or reorder columns.
-    - Category Mapping - Every custom status must map to a meta-status (To-Do, In-Progress or Done) to keep reporting and records consistent.
-3. Ticket Management:
-    - Rich Text Descriptions - Markdown editor (react-markdown) so developers can paste codeblocks.
-    - Ticket Priority - Visual indicators for Urgent, High, Medium, and Low.
-    - Ticket Assignment - Drop down to assign a ticket to a specifc user.
-    - Ticket Discussions - A threaded comment section at the bottom of each ticket for team discussion.
-4. Solid UI/UX Design:
-    - Drag and Drop Kanban - Smooth movement of cards between columns and the database updates in the background (Optimistic UI Design).
-    - Global Search - Command pallete with a keybind shortcut to quickly search for tickets by multiple filters.
-    - Real-Time Updates - Users will see eachothers changes in real time (WebSocket).
-5. Other Notable Features:
-    - Responsive Design - Kanban board is usable on every device.
-    - Authorization - User and role based authorization. OAuth? Clerk?
-    - Defensive Programming & Error Handling - Users should not be able to make the application crash. Errors should be handled well and with meaningful messages.
-    - Loading States - Feedback to the user to let them know when data is being fetched.
-    - Documentation - Logs will be made for every day worked on this application. When finished there will be indepth documentation on how each piece works.
+## Table of Contents
+- [Overview](#overview)
+- [Tech Stack](#tech-stack)
+- [Planned Features](#planned-features)
+  - [Project Structure](#project-structure)
+  - [Workflow Management](#workflow-management)
+  - [Ticket Management](#ticket-management)
+  - [User Experience](#user-experience)
+- [Development Logs](#development-logs)
+- [Status](#status)
 
-### New Database Schema
-#### Database schema based on all features (Subject to change):
-<img src="ERD.png" alt="Database ERD"  />
+## Overview
+LaunchPad is a full-stack project management tool designed to streamline Agile workflows. It features a Scrum board for high-level ticket tracking and Kanban boards for detailed task management within each ticket.
+
+## Tech Stack
+- **Frontend:** Next.js
+- **Backend:** ASP.NET + Entity Framework
+- **Database:** SQL Server
+- **Authentication:** Clerk
+- **Real-Time:** WebSocket/SignalR
+
+## Planned Features
+
+### Project Structure
+- Multiple projects per organization
+- Role-based permissions (Software Dev, QA, Project Manager, etc.)
+- Project settings and configuration
+
+### Workflow Management
+- **Scrum Board** - High-level view of tickets across sprints
+- Status tracking: Backlog, To-Do, In-Progress, In-Review, Done
+- Sprint planning and management
+
+### Ticket Management
+- Rich text descriptions with Markdown support
+- Priority levels (Low, Medium, High)
+- User assignment with history tracking
+- Threaded comment discussions
+- Audit logging for status changes
+
+### User Experience
+- Drag-and-drop interface with optimistic UI updates
+- Global search with keyboard shortcuts
+- Real-time collaboration
+- Responsive design for all devices
+- Loading states and meaningful error handling
+
+## Development Logs
+- [Log-1](https://github.com/SmokeSculpter/LaunchPad/tree/main/Logs/Log-1) - Initial project setup
+- [Log-2](https://github.com/SmokeSculpter/LaunchPad/tree/main/Logs/Log-2) - Feature planning and initial ERD
+- [Log-3](https://github.com/SmokeSculpter/LaunchPad/tree/main/Logs/Log-3) - Database schema finalization and SQL script
+
+## Status
+Currently in early development - database schema complete, implementation in progress.
