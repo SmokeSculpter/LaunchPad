@@ -1,0 +1,6 @@
+@rootURL = https://localhost:7196
+
+###
+POST {{rootURL}}/api/general/send
+Content-Type: application/json
+{ "message": "Cole is great!" }

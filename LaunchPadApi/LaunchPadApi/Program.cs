@@ -1,4 +1,6 @@
 
+using LaunchPadApi.Hubs;
+
 namespace LaunchPadApi
 {
     public class Program
@@ -10,8 +12,22 @@ namespace LaunchPadApi
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            builder.Services.AddSignalR();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                });
+            });
+
 
             var app = builder.Build();
 
@@ -23,12 +39,17 @@ namespace LaunchPadApi
 
             app.UseHttpsRedirection();
 
+            app.UseCors();
+
+            app.UseRouting();
+
             app.UseAuthorization();
 
-
             app.MapControllers();
+            app.MapHub<TestHub>("/testSocket");
 
             app.Run();
+
         }
     }
 }
