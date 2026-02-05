@@ -1,5 +1,7 @@
 
 using LaunchPadApi.Hubs;
+using LaunchPadApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaunchPadApi
 {
@@ -28,6 +30,7 @@ namespace LaunchPadApi
                 });
             });
 
+            builder.Services.AddDbContext<LaunchPadContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
@@ -46,6 +49,7 @@ namespace LaunchPadApi
             app.UseAuthorization();
 
             app.MapControllers();
+
             app.MapHub<TestHub>("/testSocket");
 
             app.Run();

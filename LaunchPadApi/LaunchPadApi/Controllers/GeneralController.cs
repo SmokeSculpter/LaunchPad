@@ -1,6 +1,8 @@
 ﻿using LaunchPadApi.Hubs;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Mvc;
+using LaunchPadApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaunchPadApi.Controllers
 {
@@ -10,20 +12,24 @@ namespace LaunchPadApi.Controllers
     {
         private readonly IHubContext<TestHub> _hubContext;
 
-        public GeneralController(IHubContext<TestHub> hubContext)
+        private readonly LaunchPadContext _context;
+
+        public GeneralController(IHubContext<TestHub> hubContext, LaunchPadContext context)
         {
             _hubContext = hubContext;
+            _context = context;
         }
 
-        public class SendMessageRequest
-        {
-            public string Message { get; set; }
-        }
 
-        [HttpPost("send")]
-        public async Task<IActionResult> Send([FromBody] SendMessageRequest request)
+        [HttpPost("sendUsers")]
+        public async Task<IActionResult> Send()
         {
-            await _hubContext.Clients.All.SendAsync("ReceiveMessage", request.Message);
+            var users = await _context.PadUsers.Select(user => new
+            {
+                Name = user.FirstName + " " + user.LastName
+            }).ToListAsync();
+
+            await _hubContext.Clients.All.SendAsync("UpdateUsers", users);
             return Ok();
         }
 

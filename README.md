@@ -4,18 +4,27 @@ A modern project management application built for Agile/Scrum teams.
 **Latest Development Log:** [Log-3 (February 4th)](https://github.com/SmokeSculpter/LaunchPad/tree/main/Logs/Log-3)
 
 ## Table of Contents
-- [Overview](#overview)
-- [Tech Stack](#tech-stack)
-- [Planned Features](#planned-features)
-  - [Project Structure](#project-structure)
-  - [Workflow Management](#workflow-management)
-  - [Ticket Management](#ticket-management)
-  - [User Experience](#user-experience)
-- [Development Logs](#development-logs)
-- [Status](#status)
+- [LaunchPad](#launchpad)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Status](#status)
+  - [Next Steps](#next-steps)
+  - [Tech Stack](#tech-stack)
+  - [Planned Features](#planned-features)
+    - [Project Structure](#project-structure)
+    - [Workflow Management](#workflow-management)
+    - [Ticket Management](#ticket-management)
+    - [User Experience](#user-experience)
+  - [Development Logs](#development-logs)
 
 ## Overview
 LaunchPad is a full-stack project management tool designed to streamline Agile workflows. It features a Scrum board for high-level ticket tracking and Kanban boards for detailed task management within each ticket.
+
+## Status
+Database schema complete. Websockets working on API.
+
+## Next Steps
+Setup authorization with clerk then complete work on back-end.
 
 ## Tech Stack
 - **Frontend:** Next.js
@@ -54,6 +63,3 @@ LaunchPad is a full-stack project management tool designed to streamline Agile w
 - [Log-1](https://github.com/SmokeSculpter/LaunchPad/tree/main/Logs/Log-1) - Initial project setup
 - [Log-2](https://github.com/SmokeSculpter/LaunchPad/tree/main/Logs/Log-2) - Feature planning and initial ERD
 - [Log-3](https://github.com/SmokeSculpter/LaunchPad/tree/main/Logs/Log-3) - Database schema finalization and SQL script
-
-## Status
-Currently in early development - database schema complete, implementation in progress.

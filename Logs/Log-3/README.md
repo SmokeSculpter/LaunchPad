@@ -4,6 +4,63 @@ A project management app currently in early development.
 ## February 4th (Log 3)
 Finalized the database schema and created the SQL script to build the database.
 
+### WebSocket Integration
+Created the LaunchPadApi back-end project and successfully added WebSocket functionality. Next we will setup authorization with Clerk and authorize each request. Proper configuration in Program.cs is important, as well as the order these methods are called.
+```csharp
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
+app.MapHub<TestHub>("/testSocket");
+```
+Then we can initialize both hub and database contexts and handle events on the socket.
+```csharp
+public async Task<IActionResult> Send()
+{
+    var users = await _context.PadUsers.Select(user => new
+    {
+        Name = user.FirstName + " " + user.LastName
+    }).ToListAsync();
+    await _hubContext.Clients.All.SendAsync("UpdateUsers", users);
+    return Ok();
+}
+```
+Then set it up client-side.
+```js
+import './style.css'
+import * as signalR from "@microsoft/signalr";
+
+
+const connection = new signalR.HubConnectionBuilder()
+  .withUrl("https://localhost:7196/testSocket")
+  .build();
+
+connection.on("UpdateUsers", (message) => {
+  console.log(message);
+})
+
+
+connection.start().then(() => console.log("Connected!"))
+  .catch(err => console.error(err));
+```
+And we have our data.
+```json
+[
+    { "name": "Alice Johnson" },
+    { "name": "Bob Smith" },
+    { "name": "Carol Williams" },
+]
+```
+
 ### Database Schema Finalization
 Reviewed the ERD from Log-2 against the planned features and made the following decisions:
 
@@ -38,4 +95,4 @@ Reviewed the ERD from Log-2 against the planned features and made the following 
 - QA approves and moves to `Done`, or sends back for rework
 
 ### Files Created:
-- `lauchpadschema.sql` - Complete SQL Server script to create all tables with constraints and relationships, indexes for faster data retrieval, and added insert statements containing dummy data created with AI.
+- `launchpadschema.sql` - Complete SQL Server script to create all tables with constraints and relationships, indexes for faster data retrieval, and insert statements containing dummy data created with AI.
