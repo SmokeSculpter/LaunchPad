@@ -3,20 +3,32 @@
 
 import { useDbUser } from "@/contexts/UserContext";
 import { useApi } from "@/hooks/useApi";
+import { useSocket } from "@/hooks/useSocket";
 import { RoleGate } from "@/components/RoleGate";
 import { UserButton } from "@clerk/nextjs";
 
-export default function DashboardPage() {
-  const { userDb, loading } = useDbUser();
+import { useEffect, useState } from "react";
 
-  if (loading) return <p>Loading...</p>;
+export default function DashboardPage() {
+  const { connection, connected } = useSocket();
+
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+    if (!connection) return;
+
+    connection.on("UserData", (data) => {
+      console.log(data);
+      setUsers(data);
+    });
+  }, [connection]);
 
   return (
     <div>
+      <h1>Hello</h1>
       <RoleGate allowed="Scrum Leader">
         <section>
           <h2>Sprint Management</h2>
-          <h3>{userDb?.name}</h3>
         </section>
       </RoleGate>
 

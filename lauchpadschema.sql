@@ -150,298 +150,320 @@ Go
 -- DUMMY DATA
 -- =============================================
 
--- Roles
+-- Roles (RoleID: 1=Scrum Leader, 2=Developer, 3=QA)
 Insert Into UserRole (Title) Values ('Scrum Leader');
 Insert Into UserRole (Title) Values ('Developer');
 Insert Into UserRole (Title) Values ('QA');
 
--- Organizations
+-- Organization (OrganizationID = 1)
 Insert Into Organization (OrgName, Email, Phone) Values ('TechCorp', 'contact@techcorp.com', '555-100-1000');
-Insert Into Organization (OrgName, Email, Phone) Values ('DataWorks', 'info@dataworks.com', '555-200-2000');
-Insert Into Organization (OrgName, Email, Phone) Values ('CloudNine', 'hello@cloudnine.com', '555-300-3000');
 
--- Users: 3 Scrum Leaders + 9 Developers + 9 QAs = 21 total
--- Scrum Leaders (RoleID = 1)
+-- Users: 9 total (3 per project: 1 Scrum Leader, 1 Developer, 1 QA)
+-- Project 1 Team (UserID 1, 2, 3)
 Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Alice', 'Johnson', 'alice.johnson@techcorp.com', 'password123', '555-101-0001', 1);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Bob', 'Smith', 'bob.smith@dataworks.com', 'password123', '555-201-0001', 1);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Carol', 'Williams', 'carol.williams@cloudnine.com', 'password123', '555-301-0001', 1);
-
--- TechCorp Developers (RoleID = 2) - UserID 4, 5, 6
 Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Dan', 'Brown', 'dan.brown@techcorp.com', 'password123', '555-101-0002', 2);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Eve', 'Davis', 'eve.davis@techcorp.com', 'password123', '555-101-0003', 2);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Frank', 'Miller', 'frank.miller@techcorp.com', 'password123', '555-101-0004', 2);
+Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Grace', 'Wilson', 'grace.wilson@techcorp.com', 'password123', '555-101-0003', 3);
 
--- TechCorp QAs (RoleID = 3) - UserID 7, 8, 9
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Grace', 'Wilson', 'grace.wilson@techcorp.com', 'password123', '555-101-0005', 3);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Hank', 'Moore', 'hank.moore@techcorp.com', 'password123', '555-101-0006', 3);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Ivy', 'Taylor', 'ivy.taylor@techcorp.com', 'password123', '555-101-0007', 3);
+-- Project 2 Team (UserID 4, 5, 6)
+Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Bob', 'Smith', 'bob.smith@techcorp.com', 'password123', '555-102-0001', 1);
+Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Eve', 'Davis', 'eve.davis@techcorp.com', 'password123', '555-102-0002', 2);
+Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Hank', 'Moore', 'hank.moore@techcorp.com', 'password123', '555-102-0003', 3);
 
--- DataWorks Developers (RoleID = 2) - UserID 10, 11, 12
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Jack', 'Anderson', 'jack.anderson@dataworks.com', 'password123', '555-201-0002', 2);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Kate', 'Thomas', 'kate.thomas@dataworks.com', 'password123', '555-201-0003', 2);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Leo', 'Jackson', 'leo.jackson@dataworks.com', 'password123', '555-201-0004', 2);
+-- Project 3 Team (UserID 7, 8, 9)
+Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Carol', 'Williams', 'carol.williams@techcorp.com', 'password123', '555-103-0001', 1);
+Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Frank', 'Miller', 'frank.miller@techcorp.com', 'password123', '555-103-0002', 2);
+Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Ivy', 'Taylor', 'ivy.taylor@techcorp.com', 'password123', '555-103-0003', 3);
 
--- DataWorks QAs (RoleID = 3) - UserID 13, 14, 15
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Mia', 'White', 'mia.white@dataworks.com', 'password123', '555-201-0005', 3);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Nick', 'Harris', 'nick.harris@dataworks.com', 'password123', '555-201-0006', 3);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Olivia', 'Martin', 'olivia.martin@dataworks.com', 'password123', '555-201-0007', 3);
+-- Projects (3 projects, all under TechCorp OrgID=1)
+Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('Website Redesign', 'Complete overhaul of the company website with modern UI/UX', '2024-06-01', null, 1);
+Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('Mobile App', 'Native mobile application for iOS and Android', '2024-06-01', null, 1);
+Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('API Gateway', 'Centralized API gateway for microservices', '2024-06-01', null, 1);
 
--- CloudNine Developers (RoleID = 2) - UserID 16, 17, 18
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Paul', 'Garcia', 'paul.garcia@cloudnine.com', 'password123', '555-301-0002', 2);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Quinn', 'Martinez', 'quinn.martinez@cloudnine.com', 'password123', '555-301-0003', 2);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Rachel', 'Robinson', 'rachel.robinson@cloudnine.com', 'password123', '555-301-0004', 2);
+-- ProjectMembers (3 per project = 9 total)
+-- Project 1: Website Redesign - Alice(1)=ScrumLeader, Dan(2)=Dev, Grace(3)=QA
+Insert Into ProjectMember (UserID, ProjectID) Values (1, 1);
+Insert Into ProjectMember (UserID, ProjectID) Values (2, 1);
+Insert Into ProjectMember (UserID, ProjectID) Values (3, 1);
 
--- CloudNine QAs (RoleID = 3) - UserID 19, 20, 21
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Sam', 'Clark', 'sam.clark@cloudnine.com', 'password123', '555-301-0005', 3);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Tina', 'Lewis', 'tina.lewis@cloudnine.com', 'password123', '555-301-0006', 3);
-Insert Into PadUser (FirstName, LastName, Email, Password, Phone, RoleID) Values ('Uma', 'Lee', 'uma.lee@cloudnine.com', 'password123', '555-301-0007', 3);
+-- Project 2: Mobile App - Bob(4)=ScrumLeader, Eve(5)=Dev, Hank(6)=QA
+Insert Into ProjectMember (UserID, ProjectID) Values (4, 2);
+Insert Into ProjectMember (UserID, ProjectID) Values (5, 2);
+Insert Into ProjectMember (UserID, ProjectID) Values (6, 2);
 
--- Projects (3 per organization = 9 total)
--- TechCorp Projects (OrgID = 1)
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('Website Redesign', 'Complete overhaul of the company website with modern UI/UX', '2025-01-15', null, 1);
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('Mobile App', 'Native mobile application for iOS and Android', '2025-02-01', null, 1);
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('API Gateway', 'Centralized API gateway for microservices', '2025-01-20', null, 1);
+-- Project 3: API Gateway - Carol(7)=ScrumLeader, Frank(8)=Dev, Ivy(9)=QA
+Insert Into ProjectMember (UserID, ProjectID) Values (7, 3);
+Insert Into ProjectMember (UserID, ProjectID) Values (8, 3);
+Insert Into ProjectMember (UserID, ProjectID) Values (9, 3);
 
--- DataWorks Projects (OrgID = 2)
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('Data Pipeline', 'Real-time data processing pipeline', '2025-01-10', null, 2);
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('Analytics Dashboard', 'Business intelligence dashboard for stakeholders', '2025-02-05', null, 2);
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('ML Platform', 'Machine learning model training and deployment platform', '2025-01-25', null, 2);
+-- =============================================
+-- SPRINTS: 10 per project = 30 total
+-- Each sprint is 2 weeks. Sprints 1-9 are InActive (completed). Sprint 10 is Active with EndDate null.
+-- Project 1 starts 2024-06-03, Project 2 starts 2024-06-03, Project 3 starts 2024-06-03
+-- =============================================
 
--- CloudNine Projects (OrgID = 3)
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('Cloud Migration', 'Migrate legacy systems to cloud infrastructure', '2025-01-05', null, 3);
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('DevOps Toolkit', 'CI/CD pipeline and infrastructure automation tools', '2025-02-10', null, 3);
-Insert Into Project (ProjectName, ProjectDescription, DateStarted, DateClosed, OrganizationID) Values ('Security Suite', 'Comprehensive security monitoring and alerting system', '2025-01-30', null, 3);
+-- Project 1 Sprints (ProjectID=1) - SprintID 1-10
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Set up project scaffolding and base layout',           'InActive', '2024-06-03', '2024-06-14', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Build navigation and header components',               'InActive', '2024-06-17', '2024-06-28', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement homepage hero and content sections',          'InActive', '2024-07-01', '2024-07-12', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Create footer and responsive breakpoints',              'InActive', '2024-07-15', '2024-07-26', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Build contact form and about page',                     'InActive', '2024-07-29', '2024-08-09', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement blog listing and detail pages',               'InActive', '2024-08-12', '2024-08-23', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Add search functionality and filters',                  'InActive', '2024-08-26', '2024-09-06', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement user authentication pages',                   'InActive', '2024-09-09', '2024-09-20', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Performance optimization and accessibility audit',      'InActive', '2024-09-23', '2024-10-04', 25, 25, 1);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Final polish and launch preparation',                   'Active',   '2024-10-07', null,         0,  25, 1);
 
--- ProjectMembers (Scrum Leader + 1 Dev + 1 QA per project)
--- TechCorp Projects (ProjectID 1, 2, 3) - Leader: Alice (1), Devs: 4,5,6, QAs: 7,8,9
-Insert Into ProjectMember (UserID, ProjectID) Values (1, 1);  -- Alice -> Website Redesign
-Insert Into ProjectMember (UserID, ProjectID) Values (4, 1);  -- Dan -> Website Redesign
-Insert Into ProjectMember (UserID, ProjectID) Values (7, 1);  -- Grace -> Website Redesign
+-- Project 2 Sprints (ProjectID=2) - SprintID 11-20
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Set up React Native project and navigation',            'InActive', '2024-06-03', '2024-06-14', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Build user registration and login screens',             'InActive', '2024-06-17', '2024-06-28', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement home feed and data fetching',                 'InActive', '2024-07-01', '2024-07-12', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Build user profile and settings screens',               'InActive', '2024-07-15', '2024-07-26', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Add push notifications and deep linking',               'InActive', '2024-07-29', '2024-08-09', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement offline mode and local storage',              'InActive', '2024-08-12', '2024-08-23', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Build messaging and chat feature',                      'InActive', '2024-08-26', '2024-09-06', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Add media upload and image handling',                   'InActive', '2024-09-09', '2024-09-20', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement analytics and crash reporting',               'InActive', '2024-09-23', '2024-10-04', 25, 25, 2);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('App store submission and final testing',                'Active',   '2024-10-07', null,         0,  25, 2);
 
-Insert Into ProjectMember (UserID, ProjectID) Values (1, 2);  -- Alice -> Mobile App
-Insert Into ProjectMember (UserID, ProjectID) Values (5, 2);  -- Eve -> Mobile App
-Insert Into ProjectMember (UserID, ProjectID) Values (8, 2);  -- Hank -> Mobile App
+-- Project 3 Sprints (ProjectID=3) - SprintID 21-30
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Design API architecture and set up Express server',     'InActive', '2024-06-03', '2024-06-14', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement authentication and JWT middleware',           'InActive', '2024-06-17', '2024-06-28', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Build CRUD endpoints for core resources',               'InActive', '2024-07-01', '2024-07-12', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Add rate limiting and request validation',              'InActive', '2024-07-15', '2024-07-26', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement caching layer with Redis',                   'InActive', '2024-07-29', '2024-08-09', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Build webhook system and event routing',               'InActive', '2024-08-12', '2024-08-23', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Add API versioning and deprecation support',           'InActive', '2024-08-26', '2024-09-06', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Implement logging and monitoring endpoints',            'InActive', '2024-09-09', '2024-09-20', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Add Swagger documentation and SDK generation',         'InActive', '2024-09-23', '2024-10-04', 25, 25, 3);
+Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, EarnedPoints, TotalPoints, ProjectID) Values ('Load testing and production hardening',                'Active',   '2024-10-07', null,         0,  25, 3);
 
-Insert Into ProjectMember (UserID, ProjectID) Values (1, 3);  -- Alice -> API Gateway
-Insert Into ProjectMember (UserID, ProjectID) Values (6, 3);  -- Frank -> API Gateway
-Insert Into ProjectMember (UserID, ProjectID) Values (9, 3);  -- Ivy -> API Gateway
+-- =============================================
+-- TICKETS: 5 per sprint = 150 total
+-- Completed sprints (1-9, 11-19, 21-29): all 5 tickets are Done with ClosedDate within sprint range
+-- Active sprints (10, 20, 30): all 5 tickets are In-Progress or In-Review with ClosedDate null
+-- =============================================
 
--- DataWorks Projects (ProjectID 4, 5, 6) - Leader: Bob (2), Devs: 10,11,12, QAs: 13,14,15
-Insert Into ProjectMember (UserID, ProjectID) Values (2, 4);  -- Bob -> Data Pipeline
-Insert Into ProjectMember (UserID, ProjectID) Values (10, 4); -- Jack -> Data Pipeline
-Insert Into ProjectMember (UserID, ProjectID) Values (13, 4); -- Mia -> Data Pipeline
+-- =============================================
+-- PROJECT 1: Website Redesign (ProjectID=1)
+-- Team: Alice(1)=ScrumLeader, Dan(2)=Dev, Grace(3)=QA
+-- =============================================
 
-Insert Into ProjectMember (UserID, ProjectID) Values (2, 5);  -- Bob -> Analytics Dashboard
-Insert Into ProjectMember (UserID, ProjectID) Values (11, 5); -- Kate -> Analytics Dashboard
-Insert Into ProjectMember (UserID, ProjectID) Values (14, 5); -- Nick -> Analytics Dashboard
+-- Sprint 1 (SprintID=1) 2024-06-03 to 2024-06-14 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Initialize Next.js project with TypeScript configuration', 5, 'High', '2024-06-03', '2024-06-07', 'Done', 2, 3, 1, 1);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up Tailwind CSS and design token system', 5, 'High', '2024-06-03', '2024-06-08', 'Done', 2, 3, 1, 1);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create base layout component with header and footer slots', 5, 'Medium', '2024-06-03', '2024-06-10', 'Done', 2, 3, 1, 1);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Configure ESLint and Prettier with project rules', 5, 'Medium', '2024-06-03', '2024-06-11', 'Done', 2, 1, 1, 1);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up CI pipeline with GitHub Actions for linting and tests', 5, 'Low', '2024-06-03', '2024-06-13', 'Done', 2, 3, 1, 1);
 
-Insert Into ProjectMember (UserID, ProjectID) Values (2, 6);  -- Bob -> ML Platform
-Insert Into ProjectMember (UserID, ProjectID) Values (12, 6); -- Leo -> ML Platform
-Insert Into ProjectMember (UserID, ProjectID) Values (15, 6); -- Olivia -> ML Platform
+-- Sprint 2 (SprintID=2) 2024-06-17 to 2024-06-28 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build responsive navigation bar with dropdown menus', 5, 'High', '2024-06-17', '2024-06-21', 'Done', 2, 3, 1, 2);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement mobile hamburger menu with slide-out panel', 5, 'High', '2024-06-17', '2024-06-22', 'Done', 2, 3, 1, 2);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create sticky header with scroll-based show/hide behavior', 5, 'Medium', '2024-06-17', '2024-06-24', 'Done', 2, 3, 1, 2);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add breadcrumb navigation component', 5, 'Medium', '2024-06-17', '2024-06-26', 'Done', 2, 1, 1, 2);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write unit tests for navigation components', 5, 'Low', '2024-06-17', '2024-06-27', 'Done', 3, 3, 1, 2);
 
--- CloudNine Projects (ProjectID 7, 8, 9) - Leader: Carol (3), Devs: 16,17,18, QAs: 19,20,21
-Insert Into ProjectMember (UserID, ProjectID) Values (3, 7);  -- Carol -> Cloud Migration
-Insert Into ProjectMember (UserID, ProjectID) Values (16, 7); -- Paul -> Cloud Migration
-Insert Into ProjectMember (UserID, ProjectID) Values (19, 7); -- Sam -> Cloud Migration
+-- Sprint 3 (SprintID=3) 2024-07-01 to 2024-07-12 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Design and build hero section with animated background', 5, 'High', '2024-07-01', '2024-07-05', 'Done', 2, 3, 1, 3);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create feature highlights grid with icon cards', 5, 'High', '2024-07-01', '2024-07-06', 'Done', 2, 3, 1, 3);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build testimonials carousel with auto-rotation', 5, 'Medium', '2024-07-01', '2024-07-09', 'Done', 2, 3, 1, 3);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add call-to-action banner with email signup', 5, 'Medium', '2024-07-01', '2024-07-10', 'Done', 2, 1, 1, 3);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement lazy loading for homepage images', 5, 'Low', '2024-07-01', '2024-07-11', 'Done', 2, 3, 1, 3);
 
-Insert Into ProjectMember (UserID, ProjectID) Values (3, 8);  -- Carol -> DevOps Toolkit
-Insert Into ProjectMember (UserID, ProjectID) Values (17, 8); -- Quinn -> DevOps Toolkit
-Insert Into ProjectMember (UserID, ProjectID) Values (20, 8); -- Tina -> DevOps Toolkit
+-- Sprint 4 (SprintID=4) 2024-07-15 to 2024-07-26 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build footer with sitemap links and social icons', 5, 'High', '2024-07-15', '2024-07-19', 'Done', 2, 3, 1, 4);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add responsive grid breakpoints for tablet and mobile', 5, 'High', '2024-07-15', '2024-07-20', 'Done', 2, 3, 1, 4);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create newsletter subscription widget in footer', 5, 'Medium', '2024-07-15', '2024-07-22', 'Done', 2, 3, 1, 4);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement cookie consent banner', 5, 'Medium', '2024-07-15', '2024-07-24', 'Done', 2, 1, 1, 4);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Fix cross-browser rendering issues on Safari and Firefox', 5, 'Low', '2024-07-15', '2024-07-25', 'Done', 2, 3, 1, 4);
 
-Insert Into ProjectMember (UserID, ProjectID) Values (3, 9);  -- Carol -> Security Suite
-Insert Into ProjectMember (UserID, ProjectID) Values (18, 9); -- Rachel -> Security Suite
-Insert Into ProjectMember (UserID, ProjectID) Values (21, 9); -- Uma -> Security Suite
+-- Sprint 5 (SprintID=5) 2024-07-29 to 2024-08-09 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build contact form with validation and submission handling', 5, 'High', '2024-07-29', '2024-08-02', 'Done', 2, 3, 1, 5);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create about page with team section and company timeline', 5, 'High', '2024-07-29', '2024-08-04', 'Done', 2, 3, 1, 5);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add Google Maps embed for office location', 5, 'Medium', '2024-07-29', '2024-08-06', 'Done', 2, 3, 1, 5);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement form spam protection with reCAPTCHA', 5, 'Medium', '2024-07-29', '2024-08-07', 'Done', 2, 1, 1, 5);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write integration tests for contact form submission', 5, 'Low', '2024-07-29', '2024-08-08', 'Done', 3, 3, 1, 5);
 
--- Sprints (1 active sprint per project = 9 total)
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Complete homepage redesign and navigation overhaul', 'Active', '2025-02-01', '2025-02-14', 21, 1);
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Build user authentication and onboarding flow', 'Active', '2025-02-03', '2025-02-17', 18, 2);
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Implement rate limiting and request validation', 'Active', '2025-02-01', '2025-02-14', 15, 3);
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Set up data ingestion from external sources', 'Active', '2025-02-01', '2025-02-14', 24, 4);
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Create main dashboard with key metrics', 'Active', '2025-02-05', '2025-02-19', 20, 5);
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Build model training pipeline infrastructure', 'Active', '2025-02-03', '2025-02-17', 26, 6);
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Migrate database servers to cloud', 'Active', '2025-02-01', '2025-02-14', 22, 7);
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Set up automated build and test pipelines', 'Active', '2025-02-10', '2025-02-24', 19, 8);
-Insert Into Sprint (Goal, SprintStatus, StartDate, EndDate, TotalPoints, ProjectID) Values ('Implement intrusion detection system', 'Active', '2025-02-03', '2025-02-17', 23, 9);
+-- Sprint 6 (SprintID=6) 2024-08-12 to 2024-08-23 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build blog listing page with pagination', 5, 'High', '2024-08-12', '2024-08-16', 'Done', 2, 3, 1, 6);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create blog detail page with rich text rendering', 5, 'High', '2024-08-12', '2024-08-17', 'Done', 2, 3, 1, 6);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add blog categories and tag filtering', 5, 'Medium', '2024-08-12', '2024-08-19', 'Done', 2, 3, 1, 6);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement social sharing buttons on blog posts', 5, 'Medium', '2024-08-12', '2024-08-21', 'Done', 2, 1, 1, 6);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add related posts sidebar widget', 5, 'Low', '2024-08-12', '2024-08-22', 'Done', 2, 3, 1, 6);
 
--- Tickets (3 per sprint = 27 total, various statuses)
--- Sprint 1: Website Redesign (ProjectID=1, SprintID=1, Dev=Dan(4), QA=Grace(7))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Design and implement new navigation header with responsive menu', 8, 'High', '2025-02-01', null, 'In-Progress', 4, 4, 1, 1);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Create hero section with animated banner and CTA buttons', 5, 'Medium', '2025-02-01', null, 'To-Do', 4, 1, 1, 1);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Build footer component with sitemap and social links', 8, 'Low', '2025-02-01', null, 'Backlog', null, 1, 1, 1);
+-- Sprint 7 (SprintID=7) 2024-08-26 to 2024-09-06 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement site-wide search with Algolia integration', 5, 'High', '2024-08-26', '2024-08-30', 'Done', 2, 3, 1, 7);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build search results page with highlighted matches', 5, 'High', '2024-08-26', '2024-09-01', 'Done', 2, 3, 1, 7);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add autocomplete suggestions dropdown', 5, 'Medium', '2024-08-26', '2024-09-03', 'Done', 2, 3, 1, 7);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement filter sidebar with checkboxes and date ranges', 5, 'Medium', '2024-08-26', '2024-09-04', 'Done', 2, 1, 1, 7);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write end-to-end tests for search functionality', 5, 'Low', '2024-08-26', '2024-09-05', 'Done', 3, 3, 1, 7);
 
--- Sprint 2: Mobile App (ProjectID=2, SprintID=2, Dev=Eve(5), QA=Hank(8))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Implement user login with email and password authentication', 8, 'High', '2025-02-03', null, 'In-Review', 5, 5, 2, 2);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Create user registration flow with email verification', 5, 'High', '2025-02-03', null, 'In-Progress', 5, 5, 2, 2);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Build welcome tutorial screens for new users', 5, 'Medium', '2025-02-03', null, 'To-Do', null, 1, 2, 2);
+-- Sprint 8 (SprintID=8) 2024-09-09 to 2024-09-20 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build login page with email and social auth options', 5, 'High', '2024-09-09', '2024-09-13', 'Done', 2, 3, 1, 8);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create registration page with form validation', 5, 'High', '2024-09-09', '2024-09-14', 'Done', 2, 3, 1, 8);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement forgot password flow with email reset', 5, 'Medium', '2024-09-09', '2024-09-16', 'Done', 2, 3, 1, 8);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add user profile page with avatar upload', 5, 'Medium', '2024-09-09', '2024-09-18', 'Done', 2, 1, 1, 8);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write security tests for authentication flows', 5, 'Low', '2024-09-09', '2024-09-19', 'Done', 3, 3, 1, 8);
 
--- Sprint 3: API Gateway (ProjectID=3, SprintID=3, Dev=Frank(6), QA=Ivy(9))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Implement token bucket rate limiting algorithm', 5, 'High', '2025-02-01', '2025-02-10', 'Done', 6, 9, 3, 3);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Add request payload validation middleware', 5, 'High', '2025-02-01', null, 'In-Review', 6, 6, 3, 3);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Create API documentation with Swagger integration', 5, 'Medium', '2025-02-01', null, 'In-Progress', 6, 6, 3, 3);
+-- Sprint 9 (SprintID=9) 2024-09-23 to 2024-10-04 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Run Lighthouse audit and fix performance issues', 5, 'High', '2024-09-23', '2024-09-27', 'Done', 2, 3, 1, 9);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement code splitting and bundle optimization', 5, 'High', '2024-09-23', '2024-09-28', 'Done', 2, 3, 1, 9);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add ARIA labels and keyboard navigation support', 5, 'Medium', '2024-09-23', '2024-09-30', 'Done', 2, 3, 1, 9);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Fix color contrast ratios to meet WCAG AA standards', 5, 'Medium', '2024-09-23', '2024-10-02', 'Done', 2, 1, 1, 9);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Run full accessibility audit with screen reader testing', 5, 'Low', '2024-09-23', '2024-10-03', 'Done', 3, 3, 1, 9);
 
--- Sprint 4: Data Pipeline (ProjectID=4, SprintID=4, Dev=Jack(10), QA=Mia(13))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Set up Kafka consumers for real-time event streaming', 8, 'High', '2025-02-01', null, 'In-Progress', 10, 10, 4, 4);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Implement data transformation and cleaning logic', 8, 'High', '2025-02-01', null, 'To-Do', 10, 2, 4, 4);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Create dead letter queue for failed messages', 8, 'Medium', '2025-02-01', null, 'Backlog', null, 2, 4, 4);
+-- Sprint 10 (SprintID=10) 2024-10-07 to null - ACTIVE
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Configure production environment variables and secrets', 5, 'High', '2024-10-07', null, 'In-Progress', 2, 2, 1, 10);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up CDN and asset caching for static resources', 5, 'High', '2024-10-07', null, 'In-Progress', 2, 2, 1, 10);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create staging to production deployment pipeline', 5, 'Medium', '2024-10-07', null, 'In-Review', 2, 3, 1, 10);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write final QA checklist and run smoke tests', 5, 'Medium', '2024-10-07', null, 'In-Review', 3, 3, 1, 10);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Prepare launch day communication and rollback plan', 5, 'Low', '2024-10-07', null, 'In-Progress', 1, 1, 1, 10);
 
--- Sprint 5: Analytics Dashboard (ProjectID=5, SprintID=5, Dev=Kate(11), QA=Nick(14))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Build revenue metrics chart with daily/weekly/monthly views', 8, 'High', '2025-02-05', null, 'In-Progress', 11, 11, 5, 5);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Create user engagement funnel visualization', 5, 'Medium', '2025-02-05', null, 'To-Do', 11, 2, 5, 5);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Implement dashboard filters and date range selector', 7, 'Medium', '2025-02-05', null, 'Backlog', null, 2, 5, 5);
+-- =============================================
+-- PROJECT 2: Mobile App (ProjectID=2)
+-- Team: Bob(4)=ScrumLeader, Eve(5)=Dev, Hank(6)=QA
+-- =============================================
 
--- Sprint 6: ML Platform (ProjectID=6, SprintID=6, Dev=Leo(12), QA=Olivia(15))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Set up distributed training infrastructure with GPU support', 10, 'High', '2025-02-03', null, 'In-Progress', 12, 12, 6, 6);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Implement model versioning and artifact storage', 8, 'High', '2025-02-03', null, 'To-Do', 12, 2, 6, 6);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Create training job scheduler with priority queues', 8, 'Medium', '2025-02-03', null, 'Backlog', null, 2, 6, 6);
+-- Sprint 11 (SprintID=11) 2024-06-03 to 2024-06-14 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Initialize React Native project with Expo configuration', 5, 'High', '2024-06-03', '2024-06-07', 'Done', 5, 6, 2, 11);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up React Navigation with bottom tab navigator', 5, 'High', '2024-06-03', '2024-06-08', 'Done', 5, 6, 2, 11);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create shared UI component library with themed styles', 5, 'Medium', '2024-06-03', '2024-06-10', 'Done', 5, 6, 2, 11);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Configure TypeScript paths and module aliases', 5, 'Medium', '2024-06-03', '2024-06-12', 'Done', 5, 4, 2, 11);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up Jest and React Native Testing Library', 5, 'Low', '2024-06-03', '2024-06-13', 'Done', 6, 6, 2, 11);
 
--- Sprint 7: Cloud Migration (ProjectID=7, SprintID=7, Dev=Paul(16), QA=Sam(19))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Migrate primary PostgreSQL database to cloud-managed instance', 10, 'High', '2025-02-01', null, 'In-Review', 16, 16, 7, 7);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Set up database replication and failover configuration', 7, 'High', '2025-02-01', null, 'In-Progress', 16, 16, 7, 7);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Configure automated backup and point-in-time recovery', 5, 'Medium', '2025-02-01', null, 'To-Do', null, 3, 7, 7);
+-- Sprint 12 (SprintID=12) 2024-06-17 to 2024-06-28 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build registration screen with form validation', 5, 'High', '2024-06-17', '2024-06-21', 'Done', 5, 6, 2, 12);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement login screen with biometric auth option', 5, 'High', '2024-06-17', '2024-06-22', 'Done', 5, 6, 2, 12);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create secure token storage with Keychain/Keystore', 5, 'Medium', '2024-06-17', '2024-06-25', 'Done', 5, 6, 2, 12);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add social login with Google and Apple Sign-In', 5, 'Medium', '2024-06-17', '2024-06-26', 'Done', 5, 4, 2, 12);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write auth flow integration tests', 5, 'Low', '2024-06-17', '2024-06-27', 'Done', 6, 6, 2, 12);
 
--- Sprint 8: DevOps Toolkit (ProjectID=8, SprintID=8, Dev=Quinn(17), QA=Tina(20))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Create GitHub Actions workflow for automated builds', 5, 'High', '2025-02-10', '2025-02-18', 'Done', 17, 20, 8, 8);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Set up automated test execution on pull requests', 7, 'High', '2025-02-10', null, 'In-Progress', 17, 17, 8, 8);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Implement deployment automation to staging environment', 7, 'Medium', '2025-02-10', null, 'To-Do', 17, 3, 8, 8);
+-- Sprint 13 (SprintID=13) 2024-07-01 to 2024-07-12 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build home feed with infinite scroll and pull-to-refresh', 5, 'High', '2024-07-01', '2024-07-05', 'Done', 5, 6, 2, 13);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement API service layer with Axios interceptors', 5, 'High', '2024-07-01', '2024-07-06', 'Done', 5, 6, 2, 13);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add loading skeletons and error state components', 5, 'Medium', '2024-07-01', '2024-07-09', 'Done', 5, 6, 2, 13);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create feed item detail screen with comments section', 5, 'Medium', '2024-07-01', '2024-07-10', 'Done', 5, 4, 2, 13);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write unit tests for data fetching hooks', 5, 'Low', '2024-07-01', '2024-07-11', 'Done', 6, 6, 2, 13);
 
--- Sprint 9: Security Suite (ProjectID=9, SprintID=9, Dev=Rachel(18), QA=Uma(21))
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Implement network traffic anomaly detection algorithm', 10, 'High', '2025-02-03', null, 'In-Progress', 18, 18, 9, 9);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Create real-time alerting system with severity levels', 8, 'High', '2025-02-03', null, 'To-Do', 18, 3, 9, 9);
-Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID)
-Values ('Build security incident dashboard with threat visualization', 5, 'Medium', '2025-02-03', null, 'Backlog', null, 3, 9, 9);
+-- Sprint 14 (SprintID=14) 2024-07-15 to 2024-07-26 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build user profile screen with editable fields', 5, 'High', '2024-07-15', '2024-07-19', 'Done', 5, 6, 2, 14);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create settings screen with notification preferences', 5, 'High', '2024-07-15', '2024-07-20', 'Done', 5, 6, 2, 14);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement dark mode toggle with theme persistence', 5, 'Medium', '2024-07-15', '2024-07-23', 'Done', 5, 6, 2, 14);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add account deletion flow with confirmation dialog', 5, 'Medium', '2024-07-15', '2024-07-24', 'Done', 5, 4, 2, 14);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write snapshot tests for profile and settings screens', 5, 'Low', '2024-07-15', '2024-07-25', 'Done', 6, 6, 2, 14);
 
--- Tasks (2-3 per ticket for tickets that are In-Progress or In-Review)
--- Ticket 1: Navigation header (In-Progress)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Create header component', 'Build base React component with responsive breakpoints', 'High', 1, 'Done', 1);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Implement mobile menu', 'Add hamburger menu with slide-out navigation for mobile', 'High', 2, 'In-Progress', 1);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add dropdown submenus', 'Create nested dropdown menus for main navigation items', 'Medium', 3, 'To-Do', 1);
+-- Sprint 15 (SprintID=15) 2024-07-29 to 2024-08-09 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Integrate Firebase Cloud Messaging for push notifications', 5, 'High', '2024-07-29', '2024-08-02', 'Done', 5, 6, 2, 15);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement deep linking with React Navigation', 5, 'High', '2024-07-29', '2024-08-04', 'Done', 5, 6, 2, 15);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create notification center screen with read/unread states', 5, 'Medium', '2024-07-29', '2024-08-06', 'Done', 5, 6, 2, 15);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add notification badge to tab bar icon', 5, 'Medium', '2024-07-29', '2024-08-07', 'Done', 5, 4, 2, 15);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Test push notifications on iOS and Android devices', 5, 'Low', '2024-07-29', '2024-08-08', 'Done', 6, 6, 2, 15);
 
--- Ticket 4: User login (In-Review)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Create login form UI', 'Build login form with email and password fields', 'High', 1, 'Done', 4);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Implement auth API call', 'Connect login form to authentication backend API', 'High', 2, 'Done', 4);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add form validation', 'Implement client-side validation with error messages', 'Medium', 3, 'Done', 4);
+-- Sprint 16 (SprintID=16) 2024-08-12 to 2024-08-23 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement SQLite local database for offline data caching', 5, 'High', '2024-08-12', '2024-08-16', 'Done', 5, 6, 2, 16);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build sync engine to reconcile local and remote data', 5, 'High', '2024-08-12', '2024-08-17', 'Done', 5, 6, 2, 16);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add network status indicator and offline banner', 5, 'Medium', '2024-08-12', '2024-08-20', 'Done', 5, 6, 2, 16);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement queue for pending actions during offline mode', 5, 'Medium', '2024-08-12', '2024-08-21', 'Done', 5, 4, 2, 16);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write tests for offline sync conflict resolution', 5, 'Low', '2024-08-12', '2024-08-22', 'Done', 6, 6, 2, 16);
 
--- Ticket 5: User registration (In-Progress)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Create registration form', 'Build multi-step registration form component', 'High', 1, 'Done', 5);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Implement email verification', 'Send verification email and handle confirmation link', 'High', 2, 'In-Progress', 5);
+-- Sprint 17 (SprintID=17) 2024-08-26 to 2024-09-06 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build real-time chat UI with message bubbles', 5, 'High', '2024-08-26', '2024-08-30', 'Done', 5, 6, 2, 17);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement WebSocket connection for live messaging', 5, 'High', '2024-08-26', '2024-09-01', 'Done', 5, 6, 2, 17);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add typing indicators and read receipts', 5, 'Medium', '2024-08-26', '2024-09-03', 'Done', 5, 6, 2, 17);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create conversation list screen with last message preview', 5, 'Medium', '2024-08-26', '2024-09-04', 'Done', 5, 4, 2, 17);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write load tests for WebSocket connections', 5, 'Low', '2024-08-26', '2024-09-05', 'Done', 6, 6, 2, 17);
 
--- Ticket 8: Rate limiting (Done)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Design rate limit algorithm', 'Implement token bucket with configurable limits', 'High', 1, 'Done', 8);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add Redis storage', 'Store rate limit counters in Redis for distributed support', 'High', 2, 'Done', 8);
+-- Sprint 18 (SprintID=18) 2024-09-09 to 2024-09-20 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build image picker with camera and gallery options', 5, 'High', '2024-09-09', '2024-09-13', 'Done', 5, 6, 2, 18);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement image compression and upload to S3', 5, 'High', '2024-09-09', '2024-09-14', 'Done', 5, 6, 2, 18);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add image caching with progressive loading', 5, 'Medium', '2024-09-09', '2024-09-17', 'Done', 5, 6, 2, 18);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create image gallery viewer with pinch-to-zoom', 5, 'Medium', '2024-09-09', '2024-09-18', 'Done', 5, 4, 2, 18);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Test media upload on low bandwidth connections', 5, 'Low', '2024-09-09', '2024-09-19', 'Done', 6, 6, 2, 18);
 
--- Ticket 9: Request validation (In-Review)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Create validation middleware', 'Build Express middleware for request validation', 'High', 1, 'Done', 9);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add JSON schema validation', 'Implement JSON schema validation for request bodies', 'High', 2, 'Done', 9);
+-- Sprint 19 (SprintID=19) 2024-09-23 to 2024-10-04 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Integrate Mixpanel analytics SDK for event tracking', 5, 'High', '2024-09-23', '2024-09-27', 'Done', 5, 6, 2, 19);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up Sentry for crash reporting and error tracking', 5, 'High', '2024-09-23', '2024-09-28', 'Done', 5, 6, 2, 19);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add screen view tracking and user flow analytics', 5, 'Medium', '2024-09-23', '2024-10-01', 'Done', 5, 6, 2, 19);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement performance monitoring for API response times', 5, 'Medium', '2024-09-23', '2024-10-02', 'Done', 5, 4, 2, 19);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Verify analytics events fire correctly across all screens', 5, 'Low', '2024-09-23', '2024-10-03', 'Done', 6, 6, 2, 19);
 
--- Ticket 10: Kafka consumers (In-Progress)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Set up Kafka client', 'Configure Kafka consumer with proper group settings', 'High', 1, 'Done', 10);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Implement message handler', 'Create message processing logic with error handling', 'High', 2, 'In-Progress', 10);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add monitoring metrics', 'Implement consumer lag and throughput metrics', 'Medium', 3, 'To-Do', 10);
+-- Sprint 20 (SprintID=20) 2024-10-07 to null - ACTIVE
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Prepare App Store metadata and screenshots', 5, 'High', '2024-10-07', null, 'In-Progress', 5, 5, 2, 20);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Configure Google Play Store listing and assets', 5, 'High', '2024-10-07', null, 'In-Progress', 5, 5, 2, 20);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Run full regression test suite on both platforms', 5, 'Medium', '2024-10-07', null, 'In-Review', 6, 6, 2, 20);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Fix critical bugs found during final testing round', 5, 'Medium', '2024-10-07', null, 'In-Progress', 5, 6, 2, 20);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create beta release for internal stakeholder review', 5, 'Low', '2024-10-07', null, 'In-Review', 4, 4, 2, 20);
 
--- Ticket 13: Revenue metrics chart (In-Progress)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Create chart component', 'Build reusable chart component with Chart.js', 'High', 1, 'Done', 13);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add time period toggle', 'Implement daily/weekly/monthly view switching', 'Medium', 2, 'In-Progress', 13);
+-- =============================================
+-- PROJECT 3: API Gateway (ProjectID=3)
+-- Team: Carol(7)=ScrumLeader, Frank(8)=Dev, Ivy(9)=QA
+-- =============================================
 
--- Ticket 16: Distributed training (In-Progress)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Set up GPU cluster', 'Configure Kubernetes cluster with GPU node pools', 'High', 1, 'Done', 16);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Implement job distribution', 'Create logic to distribute training across nodes', 'High', 2, 'In-Progress', 16);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add checkpointing', 'Implement model checkpointing for fault tolerance', 'Medium', 3, 'To-Do', 16);
+-- Sprint 21 (SprintID=21) 2024-06-03 to 2024-06-14 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Initialize Express.js project with TypeScript and folder structure', 5, 'High', '2024-06-03', '2024-06-07', 'Done', 8, 9, 3, 21);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Design RESTful API route architecture and conventions', 5, 'High', '2024-06-03', '2024-06-08', 'Done', 8, 9, 3, 21);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up error handling middleware with structured responses', 5, 'Medium', '2024-06-03', '2024-06-10', 'Done', 8, 9, 3, 21);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Configure request logging with Morgan and Winston', 5, 'Medium', '2024-06-03', '2024-06-12', 'Done', 8, 7, 3, 21);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up Supertest for API endpoint testing', 5, 'Low', '2024-06-03', '2024-06-13', 'Done', 9, 9, 3, 21);
 
--- Ticket 19: Database migration (In-Review)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Create migration script', 'Write script to export and import database schema', 'High', 1, 'Done', 19);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Migrate data', 'Transfer all production data to cloud instance', 'High', 2, 'Done', 19);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Verify data integrity', 'Run checksums and row counts to verify migration', 'High', 3, 'Done', 19);
+-- Sprint 22 (SprintID=22) 2024-06-17 to 2024-06-28 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement JWT token generation and verification', 5, 'High', '2024-06-17', '2024-06-21', 'Done', 8, 9, 3, 22);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build authentication middleware for protected routes', 5, 'High', '2024-06-17', '2024-06-22', 'Done', 8, 9, 3, 22);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create role-based access control system', 5, 'Medium', '2024-06-17', '2024-06-25', 'Done', 8, 9, 3, 22);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add refresh token rotation logic', 5, 'Medium', '2024-06-17', '2024-06-26', 'Done', 8, 7, 3, 22);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write security tests for auth middleware', 5, 'Low', '2024-06-17', '2024-06-27', 'Done', 9, 9, 3, 22);
 
--- Ticket 20: Database replication (In-Progress)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Configure read replicas', 'Set up read replicas in multiple availability zones', 'High', 1, 'Done', 20);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Set up failover', 'Configure automatic failover with health checks', 'High', 2, 'In-Progress', 20);
+-- Sprint 23 (SprintID=23) 2024-07-01 to 2024-07-12 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build CRUD endpoints for users resource', 5, 'High', '2024-07-01', '2024-07-05', 'Done', 8, 9, 3, 23);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build CRUD endpoints for projects resource', 5, 'High', '2024-07-01', '2024-07-06', 'Done', 8, 9, 3, 23);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build CRUD endpoints for tickets resource', 5, 'Medium', '2024-07-01', '2024-07-09', 'Done', 8, 9, 3, 23);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement pagination and sorting for list endpoints', 5, 'Medium', '2024-07-01', '2024-07-10', 'Done', 8, 7, 3, 23);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write integration tests for all CRUD operations', 5, 'Low', '2024-07-01', '2024-07-11', 'Done', 9, 9, 3, 23);
 
--- Ticket 22: GitHub Actions (Done)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Create workflow file', 'Write GitHub Actions YAML workflow configuration', 'High', 1, 'Done', 22);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add build steps', 'Configure build, lint, and compile steps', 'High', 2, 'Done', 22);
+-- Sprint 24 (SprintID=24) 2024-07-15 to 2024-07-26 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement token bucket rate limiting algorithm', 5, 'High', '2024-07-15', '2024-07-19', 'Done', 8, 9, 3, 24);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add request body validation with Joi schemas', 5, 'High', '2024-07-15', '2024-07-20', 'Done', 8, 9, 3, 24);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create IP-based throttling for abuse prevention', 5, 'Medium', '2024-07-15', '2024-07-23', 'Done', 8, 9, 3, 24);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add request sanitization to prevent XSS and injection', 5, 'Medium', '2024-07-15', '2024-07-24', 'Done', 8, 7, 3, 24);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write load tests for rate limiting thresholds', 5, 'Low', '2024-07-15', '2024-07-25', 'Done', 9, 9, 3, 24);
 
--- Ticket 23: Automated tests (In-Progress)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Set up test runner', 'Configure Jest test runner in CI pipeline', 'High', 1, 'Done', 23);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add PR trigger', 'Configure workflow to run on pull request events', 'Medium', 2, 'In-Progress', 23);
+-- Sprint 25 (SprintID=25) 2024-07-29 to 2024-08-09 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up Redis for response caching with TTL config', 5, 'High', '2024-07-29', '2024-08-02', 'Done', 8, 9, 3, 25);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement cache invalidation on data mutations', 5, 'High', '2024-07-29', '2024-08-04', 'Done', 8, 9, 3, 25);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add ETag support for conditional GET requests', 5, 'Medium', '2024-07-29', '2024-08-06', 'Done', 8, 9, 3, 25);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create cache health monitoring endpoint', 5, 'Medium', '2024-07-29', '2024-08-07', 'Done', 8, 7, 3, 25);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write performance benchmarks for cached vs uncached', 5, 'Low', '2024-07-29', '2024-08-08', 'Done', 9, 9, 3, 25);
 
--- Ticket 25: Anomaly detection (In-Progress)
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Research algorithms', 'Evaluate anomaly detection algorithms for network data', 'High', 1, 'Done', 25);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Implement baseline model', 'Create baseline traffic pattern model', 'High', 2, 'In-Progress', 25);
-Insert Into Task (Title, TaskDescription, TaskPriority, OrderValue, TaskStatus, TicketID) Values ('Add real-time scoring', 'Implement real-time anomaly scoring engine', 'High', 3, 'To-Do', 25);
+-- Sprint 26 (SprintID=26) 2024-08-12 to 2024-08-23 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build webhook registration and management endpoints', 5, 'High', '2024-08-12', '2024-08-16', 'Done', 8, 9, 3, 26);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement event dispatcher with retry logic', 5, 'High', '2024-08-12', '2024-08-17', 'Done', 8, 9, 3, 26);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add webhook signature verification for security', 5, 'Medium', '2024-08-12', '2024-08-20', 'Done', 8, 9, 3, 26);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create webhook delivery logs and status dashboard', 5, 'Medium', '2024-08-12', '2024-08-21', 'Done', 8, 7, 3, 26);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write end-to-end tests for webhook delivery flow', 5, 'Low', '2024-08-12', '2024-08-22', 'Done', 9, 9, 3, 26);
 
--- Assignments (for tickets with assigned users)
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', '2025-02-02', null, 4, 1);   -- Dan -> Navigation header
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', null, null, 4, 2);          -- Dan -> Hero section
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-03', '2025-02-04', null, 5, 4);  -- Eve -> User login
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-03', '2025-02-08', null, 5, 5);  -- Eve -> Registration
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', '2025-02-02', '2025-02-10', 6, 8);  -- Frank -> Rate limiting (Done)
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', '2025-02-05', null, 6, 9);  -- Frank -> Request validation
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', '2025-02-06', null, 6, 10); -- Frank -> Swagger docs
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', '2025-02-02', null, 10, 10); -- Jack -> Kafka consumers
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', null, null, 10, 11);        -- Jack -> Data transformation
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-05', '2025-02-06', null, 11, 13); -- Kate -> Revenue metrics
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-05', null, null, 11, 14);        -- Kate -> Engagement funnel
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-03', '2025-02-04', null, 12, 16); -- Leo -> Distributed training
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-03', null, null, 12, 17);        -- Leo -> Model versioning
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', '2025-02-02', null, 16, 19); -- Paul -> DB migration
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-01', '2025-02-10', null, 16, 20); -- Paul -> DB replication
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-10', '2025-02-11', '2025-02-18', 17, 22); -- Quinn -> GitHub Actions (Done)
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-10', '2025-02-15', null, 17, 23); -- Quinn -> Automated tests
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-10', null, null, 17, 24);        -- Quinn -> Deployment automation
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-03', '2025-02-04', null, 18, 25); -- Rachel -> Anomaly detection
-Insert Into Assignment (DateAssigned, DateStarted, DateFinished, UserID, TicketID) Values ('2025-02-03', null, null, 18, 26);        -- Rachel -> Alerting system
+-- Sprint 27 (SprintID=27) 2024-08-26 to 2024-09-06 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement URL-based API versioning with v1/v2 routing', 5, 'High', '2024-08-26', '2024-08-30', 'Done', 8, 9, 3, 27);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build version negotiation via Accept header', 5, 'High', '2024-08-26', '2024-09-01', 'Done', 8, 9, 3, 27);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add deprecation warning headers for old API versions', 5, 'Medium', '2024-08-26', '2024-09-03', 'Done', 8, 9, 3, 27);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create migration guide documentation for version upgrades', 5, 'Medium', '2024-08-26', '2024-09-04', 'Done', 8, 7, 3, 27);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write backward compatibility tests across versions', 5, 'Low', '2024-08-26', '2024-09-05', 'Done', 9, 9, 3, 27);
 
--- TicketLog (status change history for some tickets)
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('Backlog', 'To-Do', '2025-02-01', 'Sprint planning - moved to sprint', 1, 1);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('To-Do', 'In-Progress', '2025-02-02', 'Started working on navigation', 4, 1);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('Backlog', 'To-Do', '2025-02-03', 'Added to sprint backlog', 1, 4);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('To-Do', 'In-Progress', '2025-02-04', 'Beginning login implementation', 5, 4);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('In-Progress', 'In-Review', '2025-02-12', 'Ready for QA review', 5, 4);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('Backlog', 'To-Do', '2025-02-01', 'Sprint started', 1, 8);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('To-Do', 'In-Progress', '2025-02-02', 'Started rate limiting work', 6, 8);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('In-Progress', 'In-Review', '2025-02-08', 'Implementation complete', 6, 8);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('In-Review', 'Done', '2025-02-10', 'QA approved - all tests passing', 9, 8);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('Backlog', 'To-Do', '2025-02-10', 'Added to sprint', 3, 22);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('To-Do', 'In-Progress', '2025-02-11', 'Starting workflow setup', 17, 22);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('In-Progress', 'In-Review', '2025-02-16', 'Ready for review', 17, 22);
-Insert Into TicketLog (OldStatus, NewStatus, DateCreated, Note, UserID, TicketID) Values ('In-Review', 'Done', '2025-02-18', 'Approved and merged', 20, 22);
+-- Sprint 28 (SprintID=28) 2024-09-09 to 2024-09-20 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement structured JSON logging with correlation IDs', 5, 'High', '2024-09-09', '2024-09-13', 'Done', 8, 9, 3, 28);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create health check and readiness probe endpoints', 5, 'High', '2024-09-09', '2024-09-14', 'Done', 8, 9, 3, 28);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add Prometheus metrics endpoint for monitoring', 5, 'Medium', '2024-09-09', '2024-09-17', 'Done', 8, 9, 3, 28);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Implement request tracing with OpenTelemetry', 5, 'Medium', '2024-09-09', '2024-09-18', 'Done', 8, 7, 3, 28);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Write tests for logging output format and levels', 5, 'Low', '2024-09-09', '2024-09-19', 'Done', 9, 9, 3, 28);
 
--- Comments (discussions on some tickets)
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-02', 'Started on the header component. Planning to use CSS Grid for the layout.', null, 4, 1);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-03', 'Sounds good! Make sure it works well on tablet sizes too.', 1, 1, 1);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-04', 'Will do. I am adding breakpoints at 768px and 1024px.', 2, 4, 1);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-12', 'Login flow is complete. Used JWT tokens for session management.', null, 5, 4);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-12', 'Great work! I will start QA testing tomorrow.', 4, 8, 4);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-08', 'Rate limiting is working well. Tested with 1000 requests per minute limit.', null, 6, 8);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-09', 'Can we make the limit configurable per endpoint?', 6, 1, 8);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-09', 'Yes, I added a config file for per-route limits. Updated the PR.', 7, 6, 8);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-10', 'Perfect. Approving this ticket.', 8, 9, 8);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-11', 'Setting up the GitHub Actions workflow now. Using the latest ubuntu runner.', null, 17, 22);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-16', 'Workflow is running smoothly. Build time is around 3 minutes.', 10, 17, 22);
-Insert Into Comment (CommentDate, Content, ParentCommentID, UserID, TicketID) Values ('2025-02-18', 'Tested on multiple branches. Looks good to merge!', 11, 20, 22);
+-- Sprint 29 (SprintID=29) 2024-09-23 to 2024-10-04 - COMPLETED
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Generate Swagger/OpenAPI specification from route definitions', 5, 'High', '2024-09-23', '2024-09-27', 'Done', 8, 9, 3, 29);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Build interactive API documentation page with Swagger UI', 5, 'High', '2024-09-23', '2024-09-28', 'Done', 8, 9, 3, 29);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Auto-generate TypeScript SDK from OpenAPI spec', 5, 'Medium', '2024-09-23', '2024-10-01', 'Done', 8, 9, 3, 29);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Add example requests and responses to documentation', 5, 'Medium', '2024-09-23', '2024-10-02', 'Done', 8, 7, 3, 29);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Validate OpenAPI spec against industry standards', 5, 'Low', '2024-09-23', '2024-10-03', 'Done', 9, 9, 3, 29);
+
+-- Sprint 30 (SprintID=30) 2024-10-07 to null - ACTIVE
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Run k6 load tests and identify performance bottlenecks', 5, 'High', '2024-10-07', null, 'In-Progress', 8, 8, 3, 30);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Optimize database queries and add connection pooling', 5, 'High', '2024-10-07', null, 'In-Progress', 8, 8, 3, 30);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Configure auto-scaling rules and resource limits', 5, 'Medium', '2024-10-07', null, 'In-Review', 8, 9, 3, 30);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Set up disaster recovery and failover procedures', 5, 'Medium', '2024-10-07', null, 'In-Review', 8, 9, 3, 30);
+Insert Into Ticket (TicketDescription, Points, TicketPriority, CreatedDate, ClosedDate, TicketStatus, AssignedToUser, LastModifiedByUser, ProjectID, SprintID) Values ('Create production runbook and incident response plan', 5, 'Low', '2024-10-07', null, 'In-Progress', 7, 7, 3, 30);

@@ -85,7 +85,7 @@ namespace LaunchPadApi
 
             app.MapControllers();
 
-            app.MapHub<TestHub>("/testSocket");
+            app.MapHub<DataHub>("/data");
 
             app.Run();
 

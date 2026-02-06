@@ -10,7 +10,7 @@ export function useApi() {
         const token = await getToken();
 
         const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/${endpoint}`,
             {
                 method: method,
                 headers: {
@@ -21,6 +21,7 @@ export function useApi() {
             });
 
         if (response.status != 200) {
+            console.log(`${process.env.BACK_END_API_REST}/${endpoint}`);
             throw new Error("Authorization failed!");
         }
 
