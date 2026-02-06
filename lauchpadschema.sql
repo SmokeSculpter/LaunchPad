@@ -61,6 +61,7 @@ Create Table Sprint
 	SprintStatus varchar(50) not null Constraint ck_sprint_status_enum Check (SprintStatus in ('Planning', 'Active', 'InActive')) default 'Planning',
 	StartDate Date not null,
 	EndDate Date null,
+	EarnedPoints int not null default 0,
 	TotalPoints int not null,
 	ProjectID int not null foreign key (ProjectID) references Project(ProjectID)
 )
@@ -69,6 +70,7 @@ Create Table Ticket
 (
 	TicketID int identity(1,1) primary key not null,
 	TicketDescription varchar(300) not null,
+	TicketType varchar(50) not null Constraint ck_ticket_type_enum Check (TicketType in ('Feature', 'Bug', 'Maintenance', 'Test')) default 'Feature',
 	Points int not null,
 	TicketPriority varchar(50) not null Constraint ck_ticket_priority_enum Check (TicketPriority in ('Low', 'Medium', 'High')) default 'Medium',
 	CreatedDate Date not null,

@@ -9,6 +9,8 @@ public partial class Ticket
 
     public string TicketDescription { get; set; } = null!;
 
+    public string TicketType { get; set; } = null!;
+
     public int Points { get; set; }
 
     public string TicketPriority { get; set; } = null!;

@@ -1,7 +1,10 @@
 
 using LaunchPadApi.Hubs;
 using LaunchPadApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Task = System.Threading.Tasks.Task;
 
 namespace LaunchPadApi
 {
@@ -23,7 +26,7 @@ namespace LaunchPadApi
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
+                    policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
@@ -31,6 +34,36 @@ namespace LaunchPadApi
             });
 
             builder.Services.AddDbContext<LaunchPadContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.Authority = builder.Configuration["Clerk:Authority"];
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    ValidateIssuer = true,
+                    ValidIssuer = builder.Configuration["Clerk:Authority"],
+                    NameClaimType = "sub"
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine($"Auth failed: {context.Exception.Message}");
+                        Console.WriteLine($"Authority: {options.Authority}");
+                        return Task.CompletedTask;
+                    },
+                    OnChallenge = context =>
+                    {
+                        Console.WriteLine($"Challenge error: {context.Error}");
+                        Console.WriteLine($"Challenge description: {context.ErrorDescription}");
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 
@@ -45,6 +78,8 @@ namespace LaunchPadApi
             app.UseCors();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

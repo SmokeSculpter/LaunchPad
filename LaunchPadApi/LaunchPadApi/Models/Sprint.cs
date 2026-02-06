@@ -15,6 +15,8 @@ public partial class Sprint
 
     public DateOnly? EndDate { get; set; }
 
+    public int EarnedPoints { get; set; }
+
     public int TotalPoints { get; set; }
 
     public int ProjectId { get; set; }
