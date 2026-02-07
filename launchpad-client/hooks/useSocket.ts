@@ -47,7 +47,7 @@ export const useSocket = () => {
                     setConnected(true);
                 })
                 .catch(err => console.error("Failed to connect to socket", err));
-
+            
             return () => {
                 if (connection.state !== HubConnectionState.Disconnected) {
                     connection.stop();

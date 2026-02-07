@@ -2,27 +2,28 @@
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
+using Microsoft.AspNetCore.Authorization;
+using LaunchPadApi.Views;
+using LaunchPadApi.DTO;
+using LaunchPadApi.Services;
 
 namespace LaunchPadApi.Hubs
 {
+    [Authorize]
     public class DataHub : Hub
     {
-        private readonly LaunchPadContext _context;
+        private readonly IDashboardService _dashboardService;
 
-        public DataHub(LaunchPadContext context)
+        public DataHub(IDashboardService dashboardService)
         {
-            _context = context;
+            _dashboardService = dashboardService;
         }
 
-        public override async Task OnConnectedAsync()
+        public async Task SendDashBoardData(int userId)
         {
-            var users = new List<PadUser>();
+            var dashboard = await _dashboardService.Get_Dash_View(userId);
 
-            users = await _context.PadUsers.ToListAsync();
-
-            await Clients.Caller.SendAsync("UserData", users);
-
-            await base.OnConnectedAsync();
+            await Clients.Caller.SendAsync("DashBoardData", dashboard);
         }
     }
 }

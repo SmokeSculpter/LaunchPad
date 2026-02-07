@@ -1,6 +1,7 @@
 
 using LaunchPadApi.Hubs;
 using LaunchPadApi.Models;
+using LaunchPadApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,9 @@ namespace LaunchPadApi
 
             builder.Services.AddDbContext<LaunchPadContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddScoped<IDashboardService, DashboardService>();
+
+
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.Authority = builder.Configuration["Clerk:Authority"];
@@ -48,10 +52,23 @@ namespace LaunchPadApi
 
                 options.Events = new JwtBearerEvents
                 {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        var path = context.HttpContext.Request.Path;
+
+                        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/data"))
+                        {
+                            context.Token = accessToken;
+                        }
+
+                        return Task.CompletedTask;
+                    },
+
                     OnAuthenticationFailed = context =>
                     {
                         Console.WriteLine($"Auth failed: {context.Exception.Message}");
-                        Console.WriteLine($"Authority: {options.Authority}");
                         return Task.CompletedTask;
                     },
                     OnChallenge = context =>

@@ -36,7 +36,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         const fetchUser = async () => {
             try{
                 const data = await fetchApi<UserData>(`user/${user.publicMetadata.id}`, "GET");
-                console.log(data);
                 setUser(data);
             }
             catch (err){

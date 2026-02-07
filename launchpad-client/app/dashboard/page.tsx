@@ -17,7 +17,7 @@ export default function DashboardPage() {
   useEffect(() => {
     if (!connection) return;
 
-    connection.on("UserData", (data) => {
+    connection.on("DashBoardData", (data) => {
       console.log(data);
       setUsers(data);
     });
@@ -25,7 +25,9 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1>Hello</h1>
+      <h1 onClick={() => {
+        connection?.invoke("SendDashBoardData", 3);
+      }}>Hello</h1>
       <RoleGate allowed="Scrum Leader">
         <section>
           <h2>Sprint Management</h2>
