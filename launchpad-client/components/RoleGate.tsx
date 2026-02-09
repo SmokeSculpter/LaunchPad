@@ -12,11 +12,11 @@ type RoleGateProps = {
 export function RoleGate({ allowed, fallback = null, children }: RoleGateProps) {
     const { userDb, loading } = useDbUser();
 
-    if (loading) return null;
+    if (loading) return <>{fallback}</>;
 
     const roles = Array.isArray(allowed) ? allowed : [allowed];
 
-    if (!userDb?.role || !roles.includes(userDb?.role)) return <>{fallback}</>;
+    if (!userDb?.role || !roles.includes(userDb?.role)) return <></>;
 
     return <>{children}</>
 }

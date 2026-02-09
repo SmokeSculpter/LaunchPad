@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.37.3",
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
+    "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.14.1",
     "@microsoft/signalr": "^10.0.0",
+    "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
+    "@mui/material-nextjs": "^7.3.7",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"

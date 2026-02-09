@@ -1,11 +1,14 @@
-'use client'
-import Image from "next/image";
 import { SignOutButton, useAuth } from "@clerk/nextjs";
-import { useEffect } from "react";
+
+
+
+import Nav from "@/components/Nav";
 
 export default function Home() {
 
   return (
-    <SignOutButton/>
+    <Nav>
+      <>Hello</>
+    </Nav>
   );
 }

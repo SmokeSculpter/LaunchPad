@@ -1,8 +1,21 @@
-@import "tailwindcss";
+@layer theme, base, mui, components, utilities;
+@import 'tailwindcss';
+
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #eef2f6;
+  --purple: #5e35b1;
+}
+@layer components {
+  .flex-v-c {
+    @apply flex items-center
+  }
+  /* @media screen and (width > 1000px) {
+    .flex-v-c {
+      @apply bg-black
+    }
+  } */
 }
 
 /* @theme inline {

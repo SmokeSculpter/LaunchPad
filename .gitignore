@@ -88,3 +88,4 @@ TestResults/
 coverage/
 *.coverage
 *.coveragexml
+nul
