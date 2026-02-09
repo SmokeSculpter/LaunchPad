@@ -100,7 +100,7 @@ namespace LaunchPadApi
 
             app.UseAuthorization();
 
-            app.MapControllers();
+            app.MapControllers()
 
             app.MapHub<DataHub>("/data");
 

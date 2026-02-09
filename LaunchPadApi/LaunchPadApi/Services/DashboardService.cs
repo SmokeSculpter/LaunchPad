@@ -45,27 +45,29 @@ namespace LaunchPadApi.Services
                 })
                 .FirstOrDefaultAsync();
 
-            List<int> sprintTicketsCount = new List<int>();
+            List<SprintCount> sprintTicketsCount;
 
             if (userRole.Role.Title == "QA" || userRole.Role.Title == "Developer")
             {
-                sprintTicketsCount = new List<int>
-                {
-                    _context.Tickets.Where(ticket => ticket.TicketStatus == "To-Do" && ticket.AssignedToUser == userId && ticket.SprintId != null).Count(),
-                    _context.Tickets.Where(ticket => ticket.TicketStatus == "In-Progress" && ticket.AssignedToUser == userId && ticket.SprintId != null).Count(),
-                    _context.Tickets.Where(ticket => ticket.TicketStatus == "In-Review" && ticket.AssignedToUser == userId && ticket.SprintId != null).Count(),
-                    _context.Tickets.Where(ticket => ticket.TicketStatus == "Done" && ticket.AssignedToUser == userId && ticket.SprintId != null).Count()
-                };
+                sprintTicketsCount = await _context.Tickets
+                    .GroupBy(ticket => ticket.TicketStatus)
+                    .Select(ticketGroup => new SprintCount
+                        {
+                            Status = ticketGroup.Key,
+                            Count = ticketGroup.Where(ticket => ticket.Sprint != null && ticket.AssignedToUser == userId).Count()
+                        }
+                    ).ToListAsync();
             }
             else
             {
-                sprintTicketsCount = new List<int>
-                {
-                    _context.Tickets.Where(ticket => ticket.TicketStatus == "To-Do" && ticket.SprintId != null).Count(),
-                    _context.Tickets.Where(ticket => ticket.TicketStatus == "In-Progress" && ticket.SprintId != null).Count(),
-                    _context.Tickets.Where(ticket => ticket.TicketStatus == "In-Review" && ticket.SprintId != null).Count(),
-                    _context.Tickets.Where(ticket => ticket.TicketStatus == "Done" && ticket.SprintId != null).Count()
-                };
+                sprintTicketsCount = await _context.Tickets
+                    .GroupBy(ticket => ticket.TicketStatus)
+                    .Select(ticketGroup => new SprintCount
+                        {
+                            Status = ticketGroup.Key,
+                            Count = ticketGroup.Where(ticket => ticket.Sprint != null).Count()
+                        }
+                    ).ToListAsync();
             }
 
 
@@ -105,9 +107,9 @@ namespace LaunchPadApi.Services
                 })
                 .ToListAsync();
 
-            if (sprintTicketsCount == null || sprintTicketsCount.Count == 0)
+            if (sprintTicketsCount == null || sprintTicketsCount.Count() != 4)
             {
-                throw new Exception("Sprint Ticket Count is null");
+                throw new Exception("Sprint Ticket Count is wrong");
             }
             if (backlogTickets.Count == 0)
             {

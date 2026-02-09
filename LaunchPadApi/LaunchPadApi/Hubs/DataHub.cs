@@ -21,9 +21,16 @@ namespace LaunchPadApi.Hubs
 
         public async Task SendDashBoardData(int userId)
         {
-            var dashboard = await _dashboardService.Get_Dash_View(userId);
+            try
+            {
+                var dashboard = await _dashboardService.Get_Dash_View(userId);
 
-            await Clients.Caller.SendAsync("DashBoardData", dashboard);
+                await Clients.Caller.SendAsync("DashBoardData", dashboard);
+            }
+            catch
+            {
+                await Clients.Caller.SendAsync("DashBoardData", "Faiked to load dashboard data.");
+            }
         }
     }
 }

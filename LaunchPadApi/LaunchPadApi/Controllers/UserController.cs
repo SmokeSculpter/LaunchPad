@@ -12,13 +12,10 @@ namespace LaunchPadApi.Controllers
     [Authorize]
     public class UserController : ControllerBase
     {
-        private readonly IHubContext<TestHub> _hubContext;
-
         private readonly LaunchPadContext _context;
 
-        public UserController(IHubContext<TestHub> hubContext, LaunchPadContext context)
+        public UserController(LaunchPadContext context)
         {
-            _hubContext = hubContext;
             _context = context;
         }
 
