@@ -1,6 +1,6 @@
 ﻿namespace LaunchPadApi.DTO
 {
-    public class SprintCount
+    public class SprintTicketCountByStatus
     {
         public string Status { get; set; }
 

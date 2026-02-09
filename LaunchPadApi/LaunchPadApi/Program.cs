@@ -1,4 +1,5 @@
 
+using LaunchPadApi.Extensions;
 using LaunchPadApi.Hubs;
 using LaunchPadApi.Models;
 using LaunchPadApi.Services;
@@ -36,7 +37,7 @@ namespace LaunchPadApi
 
             builder.Services.AddDbContext<LaunchPadContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<IDashboardService, DashboardService>();
+            builder.Services.InjectDbDependenices();
 
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

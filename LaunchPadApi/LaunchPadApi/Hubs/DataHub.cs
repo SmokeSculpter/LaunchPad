@@ -27,9 +27,9 @@ namespace LaunchPadApi.Hubs
 
                 await Clients.Caller.SendAsync("DashBoardData", dashboard);
             }
-            catch
+            catch(Exception ex)
             {
-                await Clients.Caller.SendAsync("DashBoardData", "Faiked to load dashboard data.");
+                await Clients.Caller.SendAsync("DashBoardData", $"Data fetch error: {ex.Message}");
             }
         }
     }

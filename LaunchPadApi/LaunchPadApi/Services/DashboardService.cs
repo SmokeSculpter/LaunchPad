@@ -45,6 +45,11 @@ namespace LaunchPadApi.Services
                 })
                 .FirstOrDefaultAsync();
 
+            if (userRole == null || activeSprint == null)
+            {
+                throw new Exception("Failed to fetch user or active sprint");
+            }
+
             List<SprintCount> sprintTicketsCount;
 
             if (userRole.Role.Title == "QA" || userRole.Role.Title == "Developer")
