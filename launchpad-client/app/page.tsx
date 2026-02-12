@@ -1,8 +1,4 @@
-import { SignOutButton, useAuth } from "@clerk/nextjs";
-
-
-
-import Nav from "@/components/Nav";
+import Nav from "@/components/navigation/Nav";
 
 export default function Home() {
 

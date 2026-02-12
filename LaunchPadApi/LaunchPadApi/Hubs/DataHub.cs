@@ -12,25 +12,25 @@ namespace LaunchPadApi.Hubs
     [Authorize]
     public class DataHub : Hub
     {
-        private readonly IDashboardService _dashboardService;
+        //private readonly IDashboardService _dashboardService;
 
-        public DataHub(IDashboardService dashboardService)
-        {
-            _dashboardService = dashboardService;
-        }
+        //public DataHub(IDashboardService dashboardService)
+        //{
+        //    _dashboardService = dashboardService;
+        //}
 
-        public async Task SendDashBoardData(int userId)
-        {
-            try
-            {
-                var dashboard = await _dashboardService.Get_Dash_View(userId);
+        //public async Task SendDashBoardData(int userId)
+        //{
+        //    try
+        //    {
+        //        var dashboard = await _dashboardService.Get_Dash_View(userId);
 
-                await Clients.Caller.SendAsync("DashBoardData", dashboard);
-            }
-            catch(Exception ex)
-            {
-                await Clients.Caller.SendAsync("DashBoardData", $"Data fetch error: {ex.Message}");
-            }
-        }
+        //        await Clients.Caller.SendAsync("DashBoardData", dashboard);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        await Clients.Caller.SendAsync("DashBoardData", $"Data fetch error: {ex.Message}");
+        //    }
+        //}
     }
 }

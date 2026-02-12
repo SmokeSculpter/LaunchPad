@@ -37,7 +37,7 @@ namespace LaunchPadApi
 
             builder.Services.AddDbContext<LaunchPadContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.InjectDbDependenices();
+            //builder.Services.InjectDbDependenices();
 
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -101,7 +101,7 @@ namespace LaunchPadApi
 
             app.UseAuthorization();
 
-            app.MapControllers()
+            app.MapControllers();
 
             app.MapHub<DataHub>("/data");
 
