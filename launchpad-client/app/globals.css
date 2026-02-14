@@ -2,20 +2,18 @@
 @import 'tailwindcss';
 
 
+@theme inline {
+  --color-brand: #5e35b1;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #eef2f6;
   --purple: #5e35b1;
 }
-@layer components {
-  .flex-v-c {
-    @apply flex items-center
-  }
-  /* @media screen and (width > 1000px) {
-    .flex-v-c {
-      @apply bg-black
-    }
-  } */
+
+.flex-v-c {
+  @apply flex items-center
 }
 
 /* @theme inline {
